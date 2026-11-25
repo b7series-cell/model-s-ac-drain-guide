@@ -257,6 +257,11 @@ figcaption { font-size: 14px; color: var(--muted); max-width: 66ch; }
 .s-ok { stroke: var(--ok); fill: none; }
 .f-ok { fill: var(--ok); }
 
+.photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.photos figure { gap: 6px; }
+.photos img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); }
+.photos figcaption { font-size: 13.5px; }
+
 footer { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--muted); }
 footer p + p { margin-top: 8px; }
 
@@ -469,6 +474,22 @@ footer p + p { margin-top: 8px; }
     <li>Once the carpet and padding are mostly dry, mist both sides of the carpet and the top of the padding with OdoBan mixed at 5 oz per gallon of water (about 1 oz per quart), the label's mold and mildew rate. Keep it light, keep it off the wiring and connectors under the carpet, and leave the doors open while it dries because the eucalyptus scent is strong. Use OdoBan instead of vinegar, not both.</li>
     <li>If the carpet still smells musty after it's fully dry, or you see dark spots, that's mold. OdoBan prevents mold but doesn't kill mold that's already growing, so replace that padding.</li>
   </ol>
+
+  <h3>Drying in progress</h3>
+  <div class="photos">
+    <figure>
+      <img src="photos/carpets-over-seats.jpg" alt="Both front carpets and their foam footrest blocks pulled back and draped over the front seats, with the bare floor exposed" loading="lazy" width="825" height="1100">
+      <figcaption>Front carpets and foam footrest blocks pulled back over the seats so the floor and padding can air out.</figcaption>
+    </figure>
+    <figure>
+      <img src="photos/driver-footwell-drying.jpg" alt="Driver footwell with the carpet folded back, a blower fan and towels on the bare metal floor, and a pump sprayer in hand" loading="lazy" width="825" height="1100">
+      <figcaption>Driver side: blower fan and towels on the bare floor, pump sprayer ready for the OdoBan mix.</figcaption>
+    </figure>
+    <figure>
+      <img src="photos/passenger-footwell-drying.jpg" alt="Passenger footwell with the carpet and padding folded onto the seat and a fan blowing on the floor under the dash" loading="lazy" width="825" height="1100">
+      <figcaption>Passenger side: carpet and padding folded onto the seat, fan aimed at the floor under the dash.</figcaption>
+    </figure>
+  </div>
 
   <h3>Reassemble</h3>
   <ol class="steps">
