@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model S AC Drain Leak Repair</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a single-column workshop sheet. Spec strip up top, then numbered steps
+   with a ruled gutter, checklists you can tick, diagrams in framed plates. */
+:root {
+  --bg: #f3f5f6;
+  --surface: #ffffff;
+  --surface-2: #e9edef;
+  --ink: #17212b;
+  --muted: #586572;
+  --line: #cdd5db;
+  --edge: #8a97a3;
+  --accent: #1d5fc4;
+  --leak: #c8322b;
+  --ok: #1f8a4c;
+  --rain: #b97a06;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #11171c;
+    --surface: #19212a;
+    --surface-2: #232d38;
+    --ink: #e7ecf0;
+    --muted: #9aa7b3;
+    --line: #2f3b47;
+    --edge: #6f7d8a;
+    --accent: #6ea6ff;
+    --leak: #ff7a70;
+    --ok: #4fc784;
+    --rain: #e6ac3c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #11171c;
+  --surface: #19212a;
+  --surface-2: #232d38;
+  --ink: #e7ecf0;
+  --muted: #9aa7b3;
+  --line: #2f3b47;
+  --edge: #6f7d8a;
+  --accent: #6ea6ff;
+  --leak: #ff7a70;
+  --ok: #4fc784;
+  --rain: #e6ac3c;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.sheet {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Header */
+.doc-id {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 10px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 8vw, 52px);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  margin: 18px 0 12px;
+  text-wrap: balance;
+}
+.lead { font-size: 17px; max-width: 62ch; margin: 0; color: var(--ink); }
+
+/* Spec strip */
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.specs div { background: var(--surface); padding: 12px 14px; }
+.specs dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.specs dd {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Sections */
+section { display: flex; flex-direction: column; gap: 14px; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+h2 .num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--surface);
+  background: var(--ink);
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transform: translateY(-3px);
+}
+h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 6px 0 0;
+}
+p { margin: 0; max-width: 66ch; }
+.src { font-size: 14px; color: var(--muted); }
+
+ol.steps {
+  margin: 0;
+  padding: 0 0 0 16px;
+  list-style: none;
+  counter-reset: s;
+  border-left: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ol.steps li {
+  counter-increment: s;
+  position: relative;
+  padding-left: 30px;
+  max-width: 66ch;
+}
+ol.steps li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  width: 22px;
+}
+ul.checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ul.checks label {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  cursor: pointer;
+  max-width: 66ch;
+}
+ul.checks input {
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--accent);
+}
+ul.checks input:checked + span { color: var(--muted); text-decoration: line-through; }
+
+.caution {
+  border-left: 4px solid var(--leak);
+  background: var(--surface);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  max-width: 66ch;
+}
+.caution strong { color: var(--leak); font-weight: 600; }
+
+/* Tables */
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+  background: var(--surface-2);
+}
+td.gasket { box-shadow: inset 3px 0 0 var(--accent); }
+td.rain { box-shadow: inset 3px 0 0 var(--rain); }
+
+/* Diagram plates */
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.plate { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.plate svg { display: block; width: 100%; min-width: 600px; height: auto; font-family: var(--font-body); }
+figcaption { font-size: 14px; color: var(--muted); max-width: 66ch; }
+.t-ink { fill: var(--ink); }
+.t-muted { fill: var(--muted); }
+.s-edge { stroke: var(--edge); fill: none; }
+.f-pad { fill: var(--surface-2); stroke: var(--edge); }
+.f-gasket { fill: color-mix(in srgb, var(--accent) 16%, transparent); stroke: var(--accent); }
+.f-rain { fill: color-mix(in srgb, var(--rain) 20%, transparent); stroke: var(--rain); }
+.s-leak { stroke: var(--leak); fill: none; }
+.f-leak { fill: var(--leak); }
+.s-ok { stroke: var(--ok); fill: none; }
+.f-ok { fill: var(--ok); }
+
+footer { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--muted); }
+footer p + p { margin-top: 8px; }
+
+@media print {
+  body { background: #fff; font-size: 12pt; }
+  .sheet { padding: 0; gap: 22pt; max-width: none; }
+  section, figure, .caution, table { break-inside: avoid; }
+  .plate, .scroll { overflow: visible; }
+  .plate svg, table { min-width: 0; }
+  a { color: inherit; }
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+<header>
+  <div class="doc-id"><span>DIY repair sheet</span><span>2021+ Model S</span><span>Compiled Nov 25, 2026</span></div>
+  <h1>AC drain leak: wet front footwells</h1>
+  <p class="lead">On 2021 and later Model S, a foam gasket where the AC unit meets its drain can leak condensation into the padding under both front carpets. Tesla's fix is Service Bulletin SB-26-18-001, "Rework HVAC Drain Funnel Seal" (February 4, 2026): reseal the gasket through the two front footwells, with the seats and dash left in place.</p>
+</header>
+
+<dl class="specs" aria-label="Key specs">
+  <div><dt>Service bulletin</dt><dd>SB-26-18-001</dd></div>
+  <div><dt>Sealant</dt><dd>Loctite 5900 Gen 3</dd></div>
+  <div><dt>Footrest panel</dt><dd>10 mm, 5 Nm (3.7 lb-ft)</dd></div>
+  <div><dt>Console carpet</dt><dd>11 clips per side</dd></div>
+  <div><dt>Cure, AC off</dt><dd>24 hr (Permatex 82180)</dd></div>
+  <div><dt>Tesla labor time</dt><dd>0.48 hr (Model S)</dd></div>
+</dl>
+
+<section>
+  <h2>Before you pull the seats: confirm the cause</h2>
+  <p>Two wet front footwells after heavy rain can be a rain leak or the AC drain gasket. Sealing the gasket only fixes the second, so run these checks first.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Check</th><th>Points to the AC gasket</th><th>Points to a rain leak</th></tr></thead>
+      <tbody>
+        <tr><td>Where the carpet is wettest</td><td class="gasket">Inboard edge, next to the center console</td><td class="rain">Up high at the firewall, or the outer edge by the door</td></tr>
+        <tr><td>Dry-day test: dry the carpet, run the AC 20 minutes</td><td class="gasket">Carpet gets wet again</td><td class="rain">Carpet stays dry</td></tr>
+        <tr><td>Cowl test: pour water into each corner at the base of the windshield</td><td class="gasket">Water runs out fast behind the front wheels</td><td class="rain">Water pools, drains slowly, or shows up inside</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="c-cowl"><span>Clear leaves and debris from the cowl (base of the windshield, under the frunk trim)</span></label></li>
+    <li><label><input type="checkbox" id="c-checks"><span>Run the three checks and write down what you found</span></label></li>
+  </ul>
+
+  <figure>
+    <div class="plate">
+      <svg viewBox="0 0 760 372" role="img" aria-label="Water that slips past the foam gasket soaks both carpets" font-size="13">
+        <defs>
+          <marker id="leak-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-leak"/></marker>
+          <marker id="ok-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-ok"/></marker>
+        </defs>
+        <text x="24" y="34" font-size="15" font-weight="600" class="t-ink">Water that slips past the foam gasket soaks both carpets</text>
+        <text x="24" y="54" font-size="11.5" class="t-muted">Schematic cross-section looking toward the front of the car, not to scale</text>
+        <rect x="250" y="76" width="260" height="64" rx="8" class="s-edge" stroke-width="1.25"/>
+        <rect x="356" y="140" width="48" height="28" class="s-edge" stroke-width="1.25"/>
+        <text x="380" y="104" text-anchor="middle" font-weight="600" class="t-ink">AC unit</text>
+        <text x="380" y="122" text-anchor="middle" font-size="11.5" class="t-muted">under the dash and center console</text>
+        <rect x="330" y="168" width="100" height="24" rx="6" class="f-gasket" stroke-width="2"/>
+        <text x="446" y="160" font-weight="600" class="t-ink">Foam gasket: seal this joint</text>
+        <polygon points="340,192 420,192 392,240 368,240" class="s-edge" stroke-width="1.25"/>
+        <text x="432" y="226" class="t-ink">Drain funnel</text>
+        <rect x="372" y="240" width="16" height="86" class="s-edge" stroke-width="1.25"/>
+        <path d="M380 332V354" class="s-ok" stroke-width="1.5" marker-end="url(#ok-arrow)"/>
+        <text x="400" y="316" class="t-ink">Drain hose</text>
+        <text x="400" y="350" font-size="11.5" class="t-muted">Normal: water drips out under the car</text>
+        <line x1="60" x2="372" y1="272" y2="272" class="s-edge" stroke-width="2"/>
+        <line x1="388" x2="700" y1="272" y2="272" class="s-edge" stroke-width="2"/>
+        <text x="700" y="290" text-anchor="end" font-size="11.5" class="t-muted">Cabin floor</text>
+        <text x="60" y="290" font-size="11.5" class="t-muted">Under the car</text>
+        <rect x="60" y="248" width="250" height="24" class="f-pad" stroke-width="1"/>
+        <text x="72" y="264" font-size="11.5" class="t-ink">Driver-side carpet padding</text>
+        <rect x="450" y="248" width="250" height="24" class="f-pad" stroke-width="1"/>
+        <text x="462" y="264" font-size="11.5" class="t-ink">Passenger-side carpet padding</text>
+        <path d="M330 180H240V246" class="s-leak" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#leak-arrow)"/>
+        <path d="M430 180H660V246" class="s-leak" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#leak-arrow)"/>
+        <text x="285" y="172" text-anchor="middle" font-size="11.5" class="t-muted">leak path</text>
+      </svg>
+    </div>
+    <figcaption>Condensation should run from the AC unit through the gasket, funnel and hose to the ground. When the gasket leaks, some still drips outside while the rest runs sideways into the padding on both sides.</figcaption>
+  </figure>
+
+  <figure>
+    <div class="plate">
+      <svg viewBox="0 0 760 356" role="img" aria-label="Where the carpet is wettest tells you which leak it is" font-size="13">
+        <text x="24" y="34" font-size="15" font-weight="600" class="t-ink">Where the carpet is wettest tells you which leak it is</text>
+        <text x="24" y="54" font-size="11.5" class="t-muted">Top view of the front footwells, front of the car at the top, not to scale</text>
+        <line x1="120" x2="640" y1="90" y2="90" class="s-edge" stroke-width="2"/>
+        <text x="380" y="82" text-anchor="middle" font-size="11.5" class="t-muted">Firewall</text>
+        <rect x="120" y="96" width="210" height="180" rx="4" class="s-edge" stroke-width="1.25"/>
+        <rect x="120" y="96" width="170" height="32" class="f-rain" stroke-width="1.25"/>
+        <rect x="120" y="128" width="32" height="148" class="f-rain" stroke-width="1.25"/>
+        <rect x="290" y="96" width="40" height="180" class="f-gasket" stroke-width="2"/>
+        <text x="221" y="206" text-anchor="middle" font-size="12" class="t-ink">Driver footwell</text>
+        <rect x="340" y="96" width="80" height="180" rx="4" class="s-edge" stroke-width="1.25"/>
+        <text x="380" y="182" text-anchor="middle" font-size="11.5" class="t-muted"><tspan x="380">Center</tspan><tspan x="380" dy="16">console</tspan></text>
+        <rect x="430" y="96" width="210" height="180" rx="4" class="s-edge" stroke-width="1.25"/>
+        <rect x="470" y="96" width="170" height="32" class="f-rain" stroke-width="1.25"/>
+        <rect x="608" y="128" width="32" height="148" class="f-rain" stroke-width="1.25"/>
+        <rect x="430" y="96" width="40" height="180" class="f-gasket" stroke-width="2"/>
+        <text x="539" y="206" text-anchor="middle" font-size="12" class="t-ink">Passenger footwell</text>
+        <rect x="120" y="296" width="16" height="16" class="f-gasket" stroke-width="2"/>
+        <text x="146" y="309" class="t-ink">Wettest next to the console: AC drain gasket</text>
+        <rect x="120" y="322" width="16" height="16" class="f-rain" stroke-width="1.25"/>
+        <text x="146" y="335" class="t-ink">Wettest at the firewall or the door edge: rain leak (cowl or windshield)</text>
+      </svg>
+    </div>
+    <figcaption>Lift the carpet edge and press on the padding in each zone to find the wettest spot.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Tools and materials</h2>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="t-sealant"><span>Loctite 5900 Gen 3 flange sealant: Tesla part 1589861-00-A for North America. Tesla lists Würth Super RTV Silicone 200 ml (1949294-00-A) for other regions.</span></label></li>
+    <li><label><input type="checkbox" id="t-scraper"><span>Non-marring plastic scraper set. Tesla's is 1076972-00-A; plastic trim tools work.</span></label></li>
+    <li><label><input type="checkbox" id="t-light"><span>Flashlight</span></label></li>
+    <li><label><input type="checkbox" id="t-10mm"><span>10 mm socket and a small ratchet: passenger footrest panel, 2 bolts and 1 nut, 5 Nm (3.7 lb-ft)</span></label></li>
+    <li><label><input type="checkbox" id="t-trim"><span>Plastic trim tool for the clips on the console side carpets and A-pillar trims</span></label></li>
+    <li><label><input type="checkbox" id="t-vac"><span>Optional, for the clog check: shop vac, a narrow adapter, clear tubing, jack stands or ramps</span></label></li>
+    <li><label><input type="checkbox" id="t-dry"><span>Towels, white vinegar in a spray bottle, a fan or dehumidifier</span></label></li>
+  </ul>
+  <h3>From the Bob's Garage follow-up video</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="t-e12"><span>Backup: E12 external Torx (E-Torx) socket (ordered). Bob's Garage calls it a special socket for this job, likely for the bracket that cuts your hand. Tesla's procedures list only a 10 mm socket, plus a 13 mm for the toeboard bracket's upper bolt; keep the E12 in case a bolt has an E-Torx head.</span></label></li>
+    <li><label><input type="checkbox" id="t-rope"><span>Optional: Second Skin rope tape (Amazon), a sticky black sealing tape he wrapped around the joint after a 24-hour cure</span></label></li>
+    <li><label><input type="checkbox" id="t-detector"><span>Optional: a battery water-leak detector (about $10) and 3M VHB double-sided tape to stick it under the leak point</span></label></li>
+    <li><label><input type="checkbox" id="t-sponges"><span>Optional: 2 grout sponges (Home Depot) set under the funnel to catch drips before they reach the carpet</span></label></li>
+  </ul>
+
+  <h3>Sealant and cure time</h3>
+  <p>Both are moisture-cured silicone sealants and seal the same once cured. The difference is how long to wait before running the AC.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Sealant</th><th>Skins over</th><th>Full cure</th><th>Wait before running the AC</th></tr></thead>
+      <tbody>
+        <tr><td>Loctite 5900 Gen 3 (Tesla's spec)</td><td>15 minutes</td><td>Days, deep in the gap</td><td>At least 1 hour (bulletin)</td></tr>
+        <tr><td>Permatex Ultra Black 82180 (ordered)</td><td>1 to 2 hours</td><td>24 hours</td><td>24 hours</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src">Allow more time in cold or dry weather. Sources: <a href="https://henkel-adhesives.com/ph/en/product/gasketing-sealants/loctite_si_5900.html">Henkel product page</a>, <a href="https://www.permatex.com/products/gasketing/black-gasket-makers/permatex-ultra-black-rtv-silicone-gasket-maker-13-oz/">Permatex product page</a>.</p>
+</section>
+
+<section>
+  <h2><span class="num">STEP 1</span>Rule out a clogged drain</h2>
+  <p>A clog and a leaking gasket look the same from inside the car, so clear the drain before sealing anything.</p>
+  <ol class="steps">
+    <li>Raise the front of the car safely and find the AC drain hose where it comes through the firewall. In the video it was resting on the front lower control arm.</li>
+    <li>Pull the small cap off the end of the hose.</li>
+    <li>Push the clear tubing into the hose, connect it to the shop vac, and run the vac for a few minutes. Water droplets in the tubing are normal.</li>
+    <li>Refit the cap and leave the hose pointing down so it drains freely.</li>
+  </ol>
+  <p class="caution"><strong>Do not pull hard on the hose.</strong> Tesla's manual says replacing it means removing the high-voltage battery.</p>
+  <p class="src">Source: owner's video.</p>
+</section>
+
+<section>
+  <h2><span class="num">STEP 2</span>Get access</h2>
+  <p>Tesla's bulletin reaches the gasket through two openings: the driver-side console carpet and the passenger footrest panel. The seats stay in.</p>
+
+  <h3>Driver side (Tesla procedure 15196802)</h3>
+  <ol class="steps">
+    <li>Open the driver door, lower the window, and remove the floor mat.</li>
+    <li>Release the 11 clips holding the left center console side carpet, and lift it off.</li>
+  </ol>
+
+  <h3>Passenger side (Tesla procedure 15300012)</h3>
+  <ol class="steps">
+    <li>Open the passenger door, lower the window, move the seat fully rearward, and remove the floor mat.</li>
+    <li>Remove the passenger footwell cover, then the middle and lower A-pillar trims on that side.</li>
+    <li>Fold the front carpet aside and remove the right center console side carpet (11 clips).</li>
+    <li>Release the clip holding the wiring harness to the footrest panel.</li>
+    <li>Remove the 2 bolts and 1 nut with a 10 mm socket, and lift out the footrest panel. A control module sits behind it; keep sealant and water off it.</li>
+  </ol>
+  <p class="caution"><strong>Removing the seats is optional.</strong> The video's owner pulled both front seats for working room. If you do, follow Tesla's seat page: power the car down first, never unplug a seat with the low-voltage battery connected (airbags), and plan on 8 new seat track bolts at 34 Nm, since Tesla discards the old ones.</p>
+  <p class="src">Source: Tesla service bulletin SB-26-18-001 and 2021+ Model S Service Manual.</p>
+</section>
+
+<section>
+  <h2><span class="num">STEP 3</span>Seal the gasket</h2>
+  <p>Tesla's fix fills the gap between the foam sponge and the drain funnel with sealant, all the way around, from inside the gap.</p>
+  <ol class="steps">
+    <li>Put a small amount of sealant on the tip of a scraper.</li>
+    <li>Work it into the gap between the funnel's sponge and the funnel, using a flashlight. It can go on either the sponge side or the funnel side of the joint.</li>
+    <li>Repeat until the whole gap is covered fully and evenly.</li>
+    <li>Do not block the drain funnel opening.</li>
+    <li>Keep the carpet folded well clear. Cured sealant does not come off carpet.</li>
+  </ol>
+  <p class="caution"><strong>Not on the outside of the sponge.</strong> The bulletin shows sealant smeared over the outside of the sponge as the wrong way to do it. The video's owner sealed only the bottom half, from the front; Tesla calls for the whole gap.</p>
+  <p class="src">Source: Tesla service bulletin SB-26-18-001.</p>
+</section>
+
+<section>
+  <h2><span class="num">STEP 4</span>Dry out, reassemble, and test</h2>
+
+  <h3>Dry</h3>
+  <ol class="steps">
+    <li>While the panels are off, press towels hard into the padding under the carpet until they come up dry.</li>
+    <li>Spray the carpet with white vinegar to head off mildew. If the padding was soaked, run a fan overnight with the windows open.</li>
+  </ol>
+
+  <h3>Reassemble</h3>
+  <ol class="steps">
+    <li>Refit the passenger footrest panel: 2 bolts and 1 nut at 5 Nm (3.7 lb-ft) with the 10 mm socket. Reattach the harness clip.</li>
+    <li>Fold the carpet back, then refit the right console carpet, the A-pillar trims and the footwell cover.</li>
+    <li>Refit the left console carpet (11 clips) and both floor mats.</li>
+    <li>Let the sealant cure before running the AC: 24 hours with Permatex Ultra Black 82180, or at least 1 hour with Loctite 5900. Allow more time in cold or dry weather.</li>
+  </ol>
+
+  <h3>Test</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="x-drip"><span>Run the AC hard for 20 minutes and confirm water drips under the car</span></label></li>
+    <li><label><input type="checkbox" id="x-dry"><span>Feel the padding next to the console on both sides: it should stay dry</span></label></li>
+    <li><label><input type="checkbox" id="x-again"><span>Check again after the next few drives and after the next heavy rain</span></label></li>
+  </ul>
+
+  <h3>Optional extra protection (from Bob's Garage)</h3>
+  <ol class="steps">
+    <li>After the sealant has cured, wrap Second Skin rope tape around the joint.</li>
+    <li>Stick a water-leak detector under the spot where the leak came out, using 3M VHB tape, so it alarms if the leak returns.</li>
+    <li>Set 2 grout sponges under the funnel, one lengthwise and one crosswise, before refitting the panels.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Reference material</h2>
+  <p>Print the service bulletin first. It is 3 pages, with photos of the scraper, the gap, and the wrong way to apply sealant.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Source</th><th>Use it for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://service.tesla.com/docs/ServiceBulletins/External/SB/SB-26-18-001_Rework_HVAC_Drain_Funnel_Seal.pdf">SB-26-18-001: Rework HVAC Drain Funnel Seal</a></td><td>Tesla's official fix: condition, parts, procedure and photos.</td></tr>
+        <tr><td><a href="https://service.tesla.com/docs/ModelS/ServiceManual/Palladium/en-us/GUID-F61B38BB-F181-4C4E-AFDA-8E3B244B0549.html">Carpet - Side Panel - Center Console - LH</a></td><td>Driver-side access, 11 clips. The right side uses the same steps.</td></tr>
+        <tr><td><a href="https://service.tesla.com/docs/ModelS/ServiceManual/Palladium/en-us/GUID-D6546A8E-702E-47D1-B801-A1A2940F682D.html">Panel - Footrest - Front Passenger</a></td><td>Passenger-side access: 10 mm socket, 5 Nm.</td></tr>
+        <tr><td><a href="https://youtu.be/MyrdBP9xJXs">Tesla Model S/X AC Drain Fix Tutorial 2021+</a> (Mark Smith, YouTube)</td><td>The same job on video: clog check at 2:05, sealing at 4:37, passenger panel at 8:19.</td></tr>
+        <tr><td><a href="https://youtu.be/cOO-dHBiWO8">Tesla Model S/X AC Drain Fix Tutorial 2021+ Adding Water Detector</a> (Bob's Garage, YouTube)</td><td>Follow-up to the video above: the E12 socket at 0:33, rope tape at 1:14, the water detector at 1:29.</td></tr>
+        <tr><td><a href="https://service.tesla.com/docs/ModelS/ServiceManual/Palladium/en-us/GUID-7B8A8033-A93A-407B-B5A1-EB7BC7FAEBA6.html">Seat Assembly - 1st Row - LH</a></td><td>Only if you remove the seats.</td></tr>
+        <tr><td><a href="https://service.tesla.com/docs/ModelS/ServiceManual/Palladium/en-us/GUID-E480321D-BEA6-4A03-91D8-79F998013021.html">LV Power (Disconnect and Connect)</a></td><td>Only if you remove the seats.</td></tr>
+        <tr><td><a href="https://service.tesla.com/docs/ModelS/ServiceManual/Palladium/en-us/GUID-3006E6EE-43E5-40FF-82EE-4B4B15E69DC5.html">Funnel - Drain - HVAC (Remove and Replace)</a></td><td>Tesla's full replacement, for reference only: 3.90 flat-rate hours with the AC unit out.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p><strong>How far to trust this sheet.</strong> Steps 2 to 4 follow Tesla's service bulletin and service manual. The clog check and the drying steps come from the owner's video. The diagrams are schematics, not drawings of the actual parts.</p>
+  <p>If any step is unclear, stop and check the bulletin or a Tesla service center.</p>
+</footer>
+
+</main>
+</body>
+</html>
