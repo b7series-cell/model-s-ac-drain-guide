@@ -79,6 +79,8 @@ Removing the seats is optional. The video's owner pulled both front seats for wo
 
 Tesla's fix fills the gap between the foam sponge and the drain funnel with sealant, all the way around, from inside the gap.
 
+Before you start, wipe the funnel and sponge joint as dry as you can. Silicone sealant, including Permatex Ultra Black, doesn't stick well to wet surfaces.
+
 1. Put a small amount of sealant on the tip of a scraper.
 2. Work it into the gap between the funnel's sponge and the funnel, using a flashlight. It can go on either the sponge side or the funnel side of the joint.
 3. Repeat until the whole gap is covered fully and evenly.
@@ -92,8 +94,14 @@ The video's owner sealed only the bottom half, from the front. Tesla's bulletin 
 
 **Dry**
 
-1. While the panels are off, press towels hard into the padding under the carpet until they come up dry.
-2. Spray the carpet with white vinegar to head off mildew. If the padding was soaked, run a fan overnight with the windows open.
+1. Squeeze as much water as you can out of the padding, then pull the carpet back over the seats and run fans on it.
+2. Go over the padding with a wet vac: press the nozzle hard into the foam and make several slow passes. It pulls out far more water than squeezing.
+3. Check the bare metal floor under the padding for standing water, and wipe it dry.
+4. Add a dehumidifier, in the car with the doors nearly closed or in a closed garage. Fans alone just move damp air around.
+5. You can run the car's heater with A/C turned off. Leave A/C off until the gasket is sealed and cured, since running it makes more condensation.
+6. Plan on 1 to 3 days for padding that was full of water. Don't lay the carpet back until a dry paper towel pressed hard into the thickest part comes up dry.
+7. Once the carpet and padding are mostly dry, mist both sides of the carpet and the top of the padding with white vinegar mixed about half and half with water. Keep it light, and keep it off the wiring and connectors under the carpet. The smell fades in a day or two.
+8. If the carpet still smells musty after it's fully dry, or you see dark spots, that's mold. The padding may need replacing rather than more vinegar.
 
 **Reassemble**
 
