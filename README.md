@@ -25,7 +25,7 @@ Two wet front footwells after heavy rain can be a rain leak or the AC drain gask
 - [ ] 10 mm socket and a small ratchet: passenger footrest panel, 2 bolts and 1 nut, 5 Nm (3.7 lb-ft)
 - [ ] Plastic trim tool for the clips on the console side carpets and A-pillar trims
 - [ ] Optional, for the clog check: shop vac, a narrow adapter, clear tubing, jack stands or ramps
-- [ ] Towels, white vinegar in a spray bottle, a fan or dehumidifier
+- [ ] Towels, OdoBan disinfectant concentrate (eucalyptus) and a spray bottle, a wet vac, a fan and a dehumidifier
 
 **From the Bob's Garage follow-up video**
 
@@ -100,8 +100,8 @@ The video's owner sealed only the bottom half, from the front. Tesla's bulletin 
 4. Add a dehumidifier, in the car with the doors nearly closed or in a closed garage. Fans alone just move damp air around.
 5. You can run the car's heater with A/C turned off. Leave A/C off until the gasket is sealed and cured, since running it makes more condensation.
 6. Plan on 1 to 3 days for padding that was full of water. Don't lay the carpet back until a dry paper towel pressed hard into the thickest part comes up dry.
-7. Once the carpet and padding are mostly dry, mist both sides of the carpet and the top of the padding with white vinegar mixed about half and half with water. Keep it light, and keep it off the wiring and connectors under the carpet. The smell fades in a day or two.
-8. If the carpet still smells musty after it's fully dry, or you see dark spots, that's mold. The padding may need replacing rather than more vinegar.
+7. Once the carpet and padding are mostly dry, mist both sides of the carpet and the top of the padding with OdoBan mixed at 5 oz per gallon of water (about 1 oz per quart), the label's mold and mildew rate. Keep it light, keep it off the wiring and connectors under the carpet, and leave the doors open while it dries because the eucalyptus scent is strong. Use OdoBan instead of vinegar, not both.
+8. If the carpet still smells musty after it's fully dry, or you see dark spots, that's mold. OdoBan prevents mold but doesn't kill mold that's already growing, so replace that padding.
 
 **Reassemble**
 
