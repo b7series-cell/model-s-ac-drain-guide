@@ -90,6 +90,21 @@ Before you start, wipe the funnel and sponge joint as dry as you can. Silicone s
 
 The video's owner sealed only the bottom half, from the front. Tesla's bulletin calls for the whole gap.
 
+**Clean up before it cures.** Uncured sealant wipes off with a dry rag, and a little isopropyl alcohol removes the film. Once cured it has to be picked or cut off.
+
+- [ ] Threaded studs: clean them to bare metal. The footrest panel fastens to them, and one may be a ground point.
+- [ ] Connectors and plugs on the wiring harness: wipe off any sealant that dripped onto them.
+- [ ] The control module next to the studs: sealant on its case is harmless, but keep it off its connector.
+- [ ] Drips on the metal floor: wipe them up so the padding doesn't glue itself down.
+
+![The sealed joint from below](photos/sealed-joint-underside.jpg)
+
+The sealed joint, from below. Coverage on the outside is heavier than Tesla's spec, which also worked for the Bob's Garage repair.
+
+![Sealant drips near the harness, studs and module](photos/sealant-cleanup-check.jpg)
+
+What to check: drips near the wiring harness, on the stud threads and on the control module.
+
 ## Step 4: Dry, reassemble, and test
 
 **Dry**
@@ -116,10 +131,14 @@ The video's owner sealed only the bottom half, from the front. Tesla's bulletin 
 - [ ] Feel the padding next to the console on both sides: it should stay dry
 - [ ] Check again after the next few drives and the next heavy rain
 
-**Optional extra protection** (from Bob's Garage)
+**Optional extra protection**
 
-1. After the sealant has cured, wrap Second Skin rope tape around the joint.
-2. Stick a water-leak detector under the spot where the leak came out, using 3M VHB tape, so it alarms if the leak returns.
+1. After the sealant has cured, wrap Second Skin rope tape around the joint (Bob's Garage tip).
+2. Add a water-leak detector as an early warning:
+    - Mount it on the metal floor just below the sealed joint, at the low spot where the water came out, with its contacts touching the floor.
+    - Clean the spot with isopropyl alcohol and stick it down with 3M VHB tape, after the sealant has cured.
+    - Keep it clear of wiring, connectors and the studs, and notch the padding if it would press on the contacts.
+    - Test it with a damp paper towel and use a fresh name-brand battery. A beeper may be hard to hear in a closed car, so use the app alert if it has one.
 3. Set 2 grout sponges under the funnel, one lengthwise and one crosswise, before refitting the panels.
 
 ## Reference material
