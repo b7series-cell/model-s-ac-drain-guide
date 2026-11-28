@@ -262,6 +262,10 @@ figcaption { font-size: 14px; color: var(--muted); max-width: 66ch; }
 .photos img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); }
 .photos figcaption { font-size: 13.5px; }
 
+.result { border-left: 4px solid var(--ok); background: var(--surface); padding: 12px 16px; border-radius: 0 6px 6px 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
+.result strong.tag { color: var(--ok); font-weight: 600; }
+.result img { display: block; width: 100%; max-width: 520px; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+
 footer { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--muted); }
 footer p + p { margin-top: 8px; }
 
@@ -283,6 +287,14 @@ footer p + p { margin-top: 8px; }
   <h1>AC drain leak: wet front footwells</h1>
   <p class="lead">On 2021 and later Model S, a foam gasket where the AC unit meets its drain can leak condensation into the padding under both front carpets. Tesla's fix is Service Bulletin SB-26-18-001, "Rework HVAC Drain Funnel Seal" (February 4, 2026): reseal the gasket through the two front footwells, with the seats and dash left in place.</p>
 </header>
+
+<section class="result" aria-label="Result">
+  <p><strong class="tag">Result: the fix held.</strong> On this 2021 Model S, the AC test before sealing showed water coming into the cabin. After resealing the drain funnel with Permatex Ultra Black and letting it cure, a 30-minute test with the AC on max left the cabin completely dry, with the condensation draining under the car as it should. Tested November 28, 2026.</p>
+  <figure>
+    <img src="photos/ac-test-drain-outside.jpg" alt="A puddle of AC condensation on the garage floor under the front of the car after a 30-minute test" loading="lazy" width="1100" height="825">
+    <figcaption>After the 30-minute max-AC test: the condensation ends up on the garage floor under the car, not on the carpet.</figcaption>
+  </figure>
+</section>
 
 <dl class="specs" aria-label="Key specs">
   <div><dt>Service bulletin</dt><dd>SB-26-18-001</dd></div>

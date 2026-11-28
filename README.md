@@ -4,6 +4,10 @@ A printable guide for fixing wet front footwells on a 2021+ Tesla Model S caused
 
 Tesla's fix is Service Bulletin SB-26-18-001, "Rework HVAC Drain Funnel Seal" (February 4, 2026), for 2021+ Model S and Model X. It reseals the drain funnel's foam sponge through the two front footwells, with the seats and dash left in place. Tesla's labor time for a Model S is 0.48 hours.
 
+> **Result: the fix held.** On this 2021 Model S, the AC test before sealing showed water coming into the cabin. After resealing the drain funnel with Permatex Ultra Black and letting it cure, a 30-minute test with the AC on max left the cabin completely dry, with the condensation draining under the car as it should. Tested November 28, 2026.
+
+![AC condensation on the garage floor under the car after the 30-minute test](photos/ac-test-drain-outside.jpg)
+
 ## Before you pull anything: confirm the cause
 
 Two wet front footwells after heavy rain can be a rain leak or the AC drain gasket. Sealing the gasket only fixes the second, so run these checks first.
